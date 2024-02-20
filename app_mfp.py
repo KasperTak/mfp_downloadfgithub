@@ -41,12 +41,14 @@ with tab1:
         with open("temp_file.xlsx", "wb") as f:
             f.write(response.content)
             
-    github_excel_url = "https://github.com/KasperTak/mfp_downloadfgithub/blob/main/Financieringspercentages_Annuiteitenfactor.xlsx"
+  #  github_excel_url = "https://github.com/KasperTak/mfp_downloadfgithub/blob/main/Financieringspercentages_Annuiteitenfactor.xlsx"
+    github_excel_url = "https://raw.githubusercontent.com/KasperTak/mfp_downloadfgithub/blob/main/Financieringspercentages_Annuiteitenfactor.xlsx"
+
     download_excel_from_github(github_excel_url)
    # bestand = pd.read_excel("temp_file.xlsx",engine='openpyxl')
     
 
-    VOOR_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Voor AOW', engine= 'openpyxl')
+    VOOR_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Voor AOW')
     NA_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Na AOW')
     annuiteitentabel = pd.read_excel("temp_file.xlsx",sheet_name='Annuiteitenfactor') 
     studieschuldtabel = pd.read_excel("temp_file.xlsx",sheet_name='Studieschuld') 

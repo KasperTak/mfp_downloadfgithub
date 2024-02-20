@@ -1,16 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Feb  4 10:05:17 2024
-
-@author: Gebruiker
-"""
-#%%
+#%% app_mfp met download url bestand via github
 import numpy as np
 import math
 import pandas as pd
 import openpyxl
 import base64
 import io
+import requests
 #%%
 
 import numpy as np
@@ -20,6 +15,7 @@ import pandas as pd
 import altair as alt
 import base64
 import io
+import requests
 
 
 
@@ -38,10 +34,22 @@ AOW_leeftijd = 68
 
 with tab1:
     column1, column2, column3 = st.columns(3)
-    VOOR_AOW = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Voor AOW')
-    NA_AOW = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Na AOW')
-    annuiteitentabel = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Annuiteitenfactor') 
-    studieschuldtabel = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Studieschuld') 
+    
+    # functie om excelbestand in te lezen vanuit Github
+    def download_excel_from_github(url):
+        response = requests.get(url)
+        with open("temp_file.xlsx", "wb") as f:
+            f.write(response.content)
+            
+    github_excel_url = " "
+    download_excel_from_github(github_excel_url)
+    bestand = pd.read_excel("temp_file.xlsx")
+    
+
+    VOOR_AOW = pd.read_excel(bestand,sheet_name='Voor AOW')
+    NA_AOW = pd.read_excel(bestand,sheet_name='Na AOW')
+    annuiteitentabel = pd.read_excel(bestand,sheet_name='Annuiteitenfactor') 
+    studieschuldtabel = pd.read_excel(bestand,sheet_name='Studieschuld') 
     studieschuldtabel['Debetrente'] = studieschuldtabel['Debetrente'].apply(lambda x: f"{x:.3f}".replace('.',','))
     
     with column1:
@@ -392,20 +400,3 @@ with tab3:
         
 
 
-#%% financieringspercentages
-import pandas as pd
-VOOR_AOW = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Voor AOW')
-NA_AOW = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Na AOW')
-studieschuldtabel = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Studieschuld') 
-annuiteitentabel = pd.read_excel(r"C:\Users\Gebruiker\OneDrive - Office 365 Fontys\Documenten\Privé\Programmeren\Financieringspercentages_Annuiteitenfactor.xlsx",sheet_name='Annuiteitenfactor') 
-studieschuldtabel['Debetrente'] = studieschuldtabel['Debetrente'].apply(lambda x: f"{x:.3f}".replace('.',','))
-        
-# max LTI & LTV allebei weergeven
-# LTI verplaatsen
-# Eindantwoord weergeven    
-
-#%%
-
-
-#aflossingen, rentebedragen, resterende_schulden = lineaire_hypotheek(hoofdsom, looptijd_jaren, rentepercentage)
-#print_aflossingstabel(aflossingen, rentebedragen, resterende_schulden)

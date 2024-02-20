@@ -43,13 +43,13 @@ with tab1:
             
     github_excel_url = "https://github.com/KasperTak/mfp_downloadfgithub/blob/main/Financieringspercentages_Annuiteitenfactor.xlsx"
     download_excel_from_github(github_excel_url)
-    bestand = pd.read_excel("temp_file.xlsx",engine='openpyxl')
+   # bestand = pd.read_excel("temp_file.xlsx",engine='openpyxl')
     
 
-    VOOR_AOW = pd.read_excel(bestand,sheet_name='Voor AOW')
-    NA_AOW = pd.read_excel(bestand,sheet_name='Na AOW')
-    annuiteitentabel = pd.read_excel(bestand,sheet_name='Annuiteitenfactor') 
-    studieschuldtabel = pd.read_excel(bestand,sheet_name='Studieschuld') 
+    VOOR_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Voor AOW')
+    NA_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Na AOW')
+    annuiteitentabel = pd.read_excel("temp_file.xlsx",sheet_name='Annuiteitenfactor') 
+    studieschuldtabel = pd.read_excel("temp_file.xlsx",sheet_name='Studieschuld') 
     studieschuldtabel['Debetrente'] = studieschuldtabel['Debetrente'].apply(lambda x: f"{x:.3f}".replace('.',','))
     
     with column1:

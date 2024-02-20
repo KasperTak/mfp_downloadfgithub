@@ -46,7 +46,7 @@ with tab1:
    # bestand = pd.read_excel("temp_file.xlsx",engine='openpyxl')
     
 
-    VOOR_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Voor AOW')
+    VOOR_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Voor AOW', engine= 'openpyxl')
     NA_AOW = pd.read_excel("temp_file.xlsx",sheet_name='Na AOW')
     annuiteitentabel = pd.read_excel("temp_file.xlsx",sheet_name='Annuiteitenfactor') 
     studieschuldtabel = pd.read_excel("temp_file.xlsx",sheet_name='Studieschuld') 

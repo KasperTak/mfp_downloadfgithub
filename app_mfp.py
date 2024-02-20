@@ -41,7 +41,7 @@ with tab1:
         with open("temp_file.xlsx", "wb") as f:
             f.write(response.content)
             
-    github_excel_url = " "
+    github_excel_url = "https://github.com/KasperTak/mfp_downloadfgithub/blob/main/Financieringspercentages_Annuiteitenfactor.xlsx"
     download_excel_from_github(github_excel_url)
     bestand = pd.read_excel("temp_file.xlsx")
     
